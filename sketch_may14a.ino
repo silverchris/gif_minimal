@@ -107,6 +107,10 @@ void loop()
       while (gif.playFrame(false, NULL)) {
         iFrames++;
         gfx->flush();
+        if(gif.getLastError() != 0){
+          Serial.printf("Gif Error %i\n", gif.getLastError());
+          while(1){}
+        }
       }
       lTime = micros() - lTime;
       iFPS = (iFrames * 10000000) / lTime; // get 10x FPS to make an integer fraction of 1/10th 
